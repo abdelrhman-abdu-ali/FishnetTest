@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 8279958180311850812}
   - component: {fileID: -2792721559111959762}
   - component: {fileID: -5867898982599313527}
+  - component: {fileID: 5231532054651500677}
+  - component: {fileID: -6532679158875053071}
   m_Layer: 0
   m_Name: Player Predict
   m_TagString: Untagged
@@ -54,8 +56,8 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 1757649361272511363}
   _networkObjectCache: {fileID: 1757649361272511363}
   _moveRate: 5
-  _moveSpeed: 5
-  _jumpSpeed: 20
+  _moveSpeed: 2
+  _jumpSpeed: 12
   _jetPackSpeed: 5
 --- !u!114 &1757649361272511363
 MonoBehaviour:
@@ -71,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 2
-  _scenePathHash: 3601308872
+  _scenePathHash: 0
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 8158718229796691524
   _sceneNetworkObjects:
@@ -85,6 +87,7 @@ MonoBehaviour:
   - {fileID: 1757649361272511373}
   - {fileID: 8279958180311850812}
   - {fileID: -2792721559111959762}
+  - {fileID: 5231532054651500677}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   _isNetworked: 1
@@ -181,6 +184,7 @@ MonoBehaviour:
   _charecterTransform: {fileID: 1757649361272511372}
   _character2DBoxCollider: {fileID: 1757649361272511362}
   _extraHeight: 0
+  _animationController: {fileID: -6532679158875053071}
 --- !u!50 &-5867898982599313527
 Rigidbody2D:
   serializedVersion: 4
@@ -202,6 +206,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5231532054651500677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757649361272511375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184295e87f228ff4c921a44b51ded235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 1757649361272511363}
+  _networkObjectCache: {fileID: 1757649361272511363}
+--- !u!114 &-6532679158875053071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757649361272511375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7c8e10061665b4193612391596ae9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleAnimationStateName: Idel
+  moveAnimationStateName: Move
+  jumpAnimationStateName: Jump
+  attackAnimationStateName: 
+  _animator: {fileID: 1437203430601562922}
 --- !u!1 &8115879256089936065
 GameObject:
   m_ObjectHideFlags: 0

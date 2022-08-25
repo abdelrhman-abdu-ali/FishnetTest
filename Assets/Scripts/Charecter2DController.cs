@@ -12,6 +12,8 @@ public class Charecter2DController : NetworkBehaviour
     [SerializeField] private float _extraHeight = 0.1f;
     private bool _isOnGround;
 
+    [SerializeField] private CharacterAnimationController _animationController;
+
     private void Update()
     {
         _isOnGround = IsGround();
@@ -26,10 +28,17 @@ public class Charecter2DController : NetworkBehaviour
                 magnitude = new Vector3(magnitude.x, 0, magnitude.z);
             }
             _charecterTransform.position += magnitude;
+
+            if (magnitude.x != 0)
+            {
+                _animationController.SetAnimationMove();
+            }
         }
         else
         {
             _charecterTransform.position += magnitude;
+            _animationController.SetAnimationJump();
+            
         }
         
     }
