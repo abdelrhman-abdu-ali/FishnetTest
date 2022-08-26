@@ -96,7 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfea8935abf6d734dbaa481f3ae4d3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 178795241350396254}
+  _networkObjectCache: {fileID: 178795241350396254}
   _bulletSpeed: 20
+  _autoDestroyTime: 5
+  _networkObject: {fileID: 178795241350396254}
 --- !u!114 &178795241350396254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +122,8 @@ MonoBehaviour:
   _sceneNetworkObjects: []
   <IsNested>k__BackingField: 0
   <ComponentIndex>k__BackingField: 0
-  _networkBehaviours: []
+  _networkBehaviours:
+  - {fileID: 6018446770483094543}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   _isNetworked: 1

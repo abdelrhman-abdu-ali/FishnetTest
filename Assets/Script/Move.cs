@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FishNet.Object;
+using MonoFN.Cecil.Cil;
+
 public class Move : NetworkBehaviour
 {
     float speed = 2f;
@@ -17,6 +19,7 @@ public class Move : NetworkBehaviour
         if (!base.IsOwner)
             return;
         var move = new Vector3(Input.GetAxis("Horizontal"),0, 0);
+        Debug.Log(move);
         transform.position += move * speed * Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow))
         {

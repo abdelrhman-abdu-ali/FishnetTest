@@ -57,11 +57,12 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 1757649361272511363}
   _moveRate: 5
   _moveSpeed: 2
-  _jumpSpeed: 12
+  _jumpSpeed: 6
   _jetPackSpeed: 5
   _gravityForce: 5
   _bulletSpawner: {fileID: 4422000186715824197}
   _bulletSpawnerDeley: 0.05
+  _spawnBulletPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1757649361272511363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +241,7 @@ MonoBehaviour:
     type: 3}
   _bulletRightObject: {fileID: 6018446770483094542, guid: be2e3c45ae20fac43980efb613c01c0f,
     type: 3}
+  _networkObject: {fileID: 1757649361272511363}
 --- !u!1 &8115879256089936065
 GameObject:
   m_ObjectHideFlags: 0

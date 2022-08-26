@@ -43,6 +43,9 @@ public class Character2DControllerPrediction : NetworkBehaviour
         private BulletSpawner _bulletSpawner;
         [SerializeField] 
         private float _bulletSpawnerDeley;
+        
+        [SerializeField] 
+        private Vector3 _spawnBulletPosition;
 
         private float currentTime =0;
         #endregion
@@ -105,7 +108,7 @@ public class Character2DControllerPrediction : NetworkBehaviour
                 if (currentTime < 0)
                 {
                     currentTime = _bulletSpawnerDeley;
-                    _bulletSpawner.SpawnBulletLeft(transform.position);
+                    _bulletSpawner.SpawnBulletLeft(transform.position +_spawnBulletPosition );
                 }
                 
             }

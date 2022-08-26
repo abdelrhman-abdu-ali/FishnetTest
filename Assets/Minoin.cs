@@ -7,7 +7,7 @@ using FishNet.Transporting;
 
 public class Minoin : NetworkBehaviour
 {
-    [SyncVar(Channel = Channel.Reliable, ReadPermissions = ReadPermission.Observers, SendRate = 0.1f, OnChange = nameof(Update))]
+    [SyncVar(Channel = Channel.Reliable, ReadPermissions = ReadPermission.Observers, SendRate = 0.1f)]
     private Transform transform;
     bool startMove=false;
 
