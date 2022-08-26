@@ -13,10 +13,14 @@ public class Charecter2DController : NetworkBehaviour
     private bool _isOnGround;
 
     [SerializeField] private CharacterAnimationController _animationController;
+    [SerializeField] private LayerMask _ignoreLayer;
+
+    
 
     private void Update()
     {
         _isOnGround = IsGround();
+        
     }
 
     public void Move(Vector3 magnitude )
@@ -33,6 +37,10 @@ public class Charecter2DController : NetworkBehaviour
             {
                 _animationController.SetAnimationMove();
             }
+            else
+            {
+                _animationController.SetAnimationIdle();
+            }
         }
         else
         {
@@ -45,13 +53,22 @@ public class Charecter2DController : NetworkBehaviour
 
     private bool IsGround()
     {
-
-        Physics2D.Raycast(_character2DBoxCollider.bounds.center, Vector2.down,
-            _character2DBoxCollider.bounds.extents.y + _extraHeight);
+        bool result = false;
+        RaycastHit2D raycastHit = Physics2D.Raycast(_character2DBoxCollider.bounds.center, Vector2.down,
+            _character2DBoxCollider.bounds.extents.y + _extraHeight,~_ignoreLayer);
         Color rayColor;
+        if (raycastHit.collider != null)
+        {
+            Debug.Log("Hit something");
+            if (raycastHit.collider.gameObject.CompareTag("Ground"))
+            {
+                Debug.Log("Hit the ground");
+                result = true;
+            }
+        }
         Debug.DrawRay(_character2DBoxCollider.bounds.center, Vector2.down*
             (_character2DBoxCollider.bounds.extents.y + _extraHeight));
-        return true;
+        return result;
     }
 
     private void OnCollisionEnter2D(Collision2D col)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FishNet;
 using UnityEngine;
@@ -36,11 +37,24 @@ public class Character2DControllerPrediction : NetworkBehaviour
         private float _jumpSpeed = 5f;
         [SerializeField]
         private float _jetPackSpeed = 5f;
+        [SerializeField]
+        private float _gravityForce = 5f;
+        [SerializeField] 
+        private BulletSpawner _bulletSpawner;
+        [SerializeField] 
+        private float _bulletSpawnerDeley;
+
+        private float currentTime =0;
         #endregion
 
         #region Private.
         private Charecter2DController _characterController;
         #endregion
+
+        private void Update()
+        {
+            currentTime -= Time.deltaTime;
+        }
 
         private void Awake()
         {
@@ -85,6 +99,17 @@ public class Character2DControllerPrediction : NetworkBehaviour
             float horizontal = Input.GetAxisRaw("Horizontal");
             float jump = Input.GetAxisRaw("Jump");
 
+            float fire = Input.GetAxisRaw("Fire1");
+            if (fire == 1)
+            {
+                if (currentTime < 0)
+                {
+                    currentTime = _bulletSpawnerDeley;
+                    _bulletSpawner.SpawnBulletLeft(transform.position);
+                }
+                
+            }
+
             if (horizontal == 0f && jump == 0f)
                 return;
 
@@ -98,7 +123,7 @@ public class Character2DControllerPrediction : NetworkBehaviour
         [Replicate]
         private void Move(Character2DControllerPrediction.MoveData md, bool asServer, bool replaying = false)
         {
-            Vector3 move = new Vector3(md.Horizontal* _moveSpeed, md.Jump*_jumpSpeed, 0) + new Vector3(0f, Physics.gravity.y, 0f);
+            Vector3 move = new Vector3(md.Horizontal* _moveSpeed, md.Jump*_jumpSpeed, 0) + new Vector3(0f, -_gravityForce, 0f);
             //move = move.normalized;
             Debug.Log("Jump:"+md.Jump*_jumpSpeed+"move:"+move);
             _characterController.Move(move* _moveRate  * (float)base.TimeManager.TickDelta);

@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 1757649361272511363}
   - component: {fileID: 1757649361272511362}
   - component: {fileID: 1757649361272511373}
-  - component: {fileID: 8279958180311850812}
   - component: {fileID: -2792721559111959762}
   - component: {fileID: -5867898982599313527}
   - component: {fileID: 5231532054651500677}
   - component: {fileID: -6532679158875053071}
-  m_Layer: 0
+  - component: {fileID: 4422000186715824197}
+  m_Layer: 8
   m_Name: Player Predict
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757649361272511375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -59,6 +59,9 @@ MonoBehaviour:
   _moveSpeed: 2
   _jumpSpeed: 12
   _jetPackSpeed: 5
+  _gravityForce: 5
+  _bulletSpawner: {fileID: 4422000186715824197}
+  _bulletSpawnerDeley: 0.05
 --- !u!114 &1757649361272511363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,22 +75,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 2
-  _scenePathHash: 0
+  <PrefabId>k__BackingField: 3
+  _scenePathHash: 3656041278
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 8158718229796691524
+  <AssetPathHash>k__BackingField: 13783970241136744414
   _sceneNetworkObjects:
   - {fileID: 1757649361272511363}
-  - {fileID: 0}
-  - {fileID: 0}
   <IsNested>k__BackingField: 0
   <ComponentIndex>k__BackingField: 0
   _networkBehaviours:
   - {fileID: 1757649361272511360}
   - {fileID: 1757649361272511373}
-  - {fileID: 8279958180311850812}
   - {fileID: -2792721559111959762}
   - {fileID: 5231532054651500677}
+  - {fileID: 4422000186715824197}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   _isNetworked: 1
@@ -145,27 +146,6 @@ MonoBehaviour:
   _rigidbody2d: {fileID: 0}
   _networkTransform: {fileID: 0}
   _predictionRatio: 0
---- !u!114 &8279958180311850812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757649361272511375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 2
-  _addedNetworkObject: {fileID: 1757649361272511363}
-  _networkObjectCache: {fileID: 1757649361272511363}
-  IgnoredParameters: []
-  _animator: {fileID: 1437203430601562922}
-  _smoothFloats: 1
-  _synchronizeInterval: 0.1
-  _clientAuthoritative: 1
-  _sendToOwner: 0
 --- !u!114 &-2792721559111959762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,13 +158,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09f41be2ccebd904cbc4b8eeebb0d6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 3
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 1757649361272511363}
   _networkObjectCache: {fileID: 1757649361272511363}
   _charecterTransform: {fileID: 1757649361272511372}
   _character2DBoxCollider: {fileID: 1757649361272511362}
-  _extraHeight: 0
+  _extraHeight: 0.02
   _animationController: {fileID: -6532679158875053071}
+  _ignoreLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &-5867898982599313527
 Rigidbody2D:
   serializedVersion: 4
@@ -218,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184295e87f228ff4c921a44b51ded235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 4
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 1757649361272511363}
   _networkObjectCache: {fileID: 1757649361272511363}
 --- !u!114 &-6532679158875053071
@@ -233,11 +216,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7c8e10061665b4193612391596ae9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAnimationStateName: Idel
-  moveAnimationStateName: Move
-  jumpAnimationStateName: Jump
-  attackAnimationStateName: 
+  idleAnimationBoolName: isIdle
+  moveAnimationBoolName: isWalk
+  jumpAnimationBoolName: isJump
+  attackAnimationBoolName: 
   _animator: {fileID: 1437203430601562922}
+--- !u!114 &4422000186715824197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757649361272511375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52aecea9441da5442a153e819b7311b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 1757649361272511363}
+  _networkObjectCache: {fileID: 1757649361272511363}
+  _bulletLeftObject: {fileID: 7649274118757969298, guid: 84d603037d5dbe1449747f31c668bb41,
+    type: 3}
+  _bulletRightObject: {fileID: 6018446770483094542, guid: be2e3c45ae20fac43980efb613c01c0f,
+    type: 3}
 --- !u!1 &8115879256089936065
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +251,7 @@ GameObject:
   - component: {fileID: 8115879256089936093}
   - component: {fileID: 8115879256089936092}
   - component: {fileID: 1437203430601562922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,10 +332,10 @@ Animator:
   m_GameObject: {fileID: 8115879256089936065}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a18db263db1ead44b8d8de3369e7605c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 29e4576f68aa8ac4bbb00506f33e3050, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
