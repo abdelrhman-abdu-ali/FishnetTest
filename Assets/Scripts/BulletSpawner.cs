@@ -18,7 +18,7 @@ public class BulletSpawner : NetworkBehaviour
         }
     }
 
-    
+    [ServerRpc]
     public void SpawnBullet(GameObject bullet,Vector3 worldPosition,BulletSpawner spawner)
     {
         GameObject spawnedBullet = Instantiate(bullet, worldPosition, Quaternion.identity);

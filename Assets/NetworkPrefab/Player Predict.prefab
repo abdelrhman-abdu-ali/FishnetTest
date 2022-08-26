@@ -62,7 +62,7 @@ MonoBehaviour:
   _gravityForce: 5
   _bulletSpawner: {fileID: 4422000186715824197}
   _bulletSpawnerDeley: 0.05
-  _spawnBulletPosition: {x: 0, y: 0, z: 0}
+  _spawnBulletPosition: {x: -1, y: 0, z: 0}
 --- !u!114 &1757649361272511363
 MonoBehaviour:
   m_ObjectHideFlags: 0
